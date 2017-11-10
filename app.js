@@ -18,6 +18,15 @@ app.options('*', cors());
 //Import all routes
 
 app.set('port', 3000);
+
+app.use(function (req, res, next) {
+    if(!req.originalUrl.includes('/api/')){
+        res.sendfile(__dirname+'/public/index.html');
+    }else{
+        next();
+    }
+       
+  });
 //here start the middlewares
 app.listen(app.get('port'), function() {
                 console.log('Express server listening on port ' + app.get('port'))
