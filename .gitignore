@@ -1,0 +1,11 @@
+.DS_Store
+*.swp
+*~
+node_modules
+*.log
+build
+.idea/
+/.idea
+/public
+/distLGT
+/logs
