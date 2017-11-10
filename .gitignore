@@ -4,8 +4,4 @@
 node_modules
 *.log
 build
-.idea/
-/.idea
-/public
-/distLGT
 /logs
