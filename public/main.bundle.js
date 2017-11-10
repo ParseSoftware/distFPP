@@ -3520,7 +3520,7 @@ module.exports = __webpack_require__.p + "post.00ea02c22aaffd154b1b.svg";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    apiUrl: 'http://34.215.129.201:30003/'
+    apiUrl: 'http://34.215.129.201:3003/'
 };
 //# sourceMappingURL=environment.js.map
 
