@@ -2,7 +2,6 @@ var express             = require('express');
 var app                 = express();
 var cors                = require('cors');
 
-app.use(express.static(__dirname + '/public'));
 
 app.use(cors());
 
@@ -19,10 +18,10 @@ app.options('*', cors());
 
 app.set('port', 3000);
 
-app.use(express.static(__dirname + '/workforce/dist'));
+app.use(express.static(__dirname + '/public'));
 
 app.get('*', function(req, res) {
-       res.sendFile(__dirname+'/workforce/dist/index.html');
+       res.sendFile(__dirname+'/public/index.html');
 })
 
 //here start the middlewares
