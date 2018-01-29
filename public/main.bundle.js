@@ -4158,7 +4158,7 @@ var NewUploadService = (function () {
         };
         this.requestCredentials = function (fileName) {
             // const observable = new Observable<any>(observer => {
-            return this.http.get(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiUrl + '/image' + fileName);
+            return this.http.get(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiUrl + 'image/' + fileName);
         };
         this.getCredentials = function (files) {
             var credentialsObservables = [];
