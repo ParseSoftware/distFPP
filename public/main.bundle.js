@@ -4158,7 +4158,7 @@ var NewUploadService = (function () {
         };
         this.requestCredentials = function (fileName) {
             // const observable = new Observable<any>(observer => {
-            return this.http.get(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiUrl + 'image/' + fileName);
+            return this.http.get(__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].apiUrl + '/image/' + fileName);
         };
         this.getCredentials = function (files) {
             var credentialsObservables = [];
@@ -5136,7 +5136,7 @@ module.exports = __webpack_require__.p + "post.00ea02c22aaffd154b1b.svg";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    apiUrl: 'http://34.215.129.201:3003/',
+    apiUrl: 'http://34.215.129.201:3003',
     s3bucketURL: 'https://familypetproyect.s3.us-west-2.amazonaws.com'
 };
 //# sourceMappingURL=environment.js.map
