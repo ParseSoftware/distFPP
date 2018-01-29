@@ -1228,7 +1228,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ManagePeopleComponent = (function () {
-    function ManagePeopleComponent(managepeopleService, toastr, router) {
+    function ManagePeopleComponent(managepeopleService, toastr, router, vcr) {
         this.managepeopleService = managepeopleService;
         this.toastr = toastr;
         this.router = router;
@@ -1298,10 +1298,10 @@ ManagePeopleComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/home/manage-people/manage-people.component.html"),
         styles: [__webpack_require__("../../../../../src/app/home/manage-people/manage-people.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_managepeople_service__["a" /* ManagepeopleService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_managepeople_service__["a" /* ManagepeopleService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_managepeople_service__["a" /* ManagepeopleService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_managepeople_service__["a" /* ManagepeopleService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]) === "function" && _d || Object])
 ], ManagePeopleComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=manage-people.component.js.map
 
 /***/ }),
@@ -2062,6 +2062,8 @@ module.exports = "<div class=\"jumbotron psln-container\">\r\n  <div class=\"con
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_socket_get_image_service__ = __webpack_require__("../../../../../src/app/shared/socket/get-image.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_pet__ = __webpack_require__("../../../../../src/app/home/pet/pets/shared/pet.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_toastr_ng2_toastr__ = __webpack_require__("../../../../ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ng2_toastr_ng2_toastr__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2076,12 +2078,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var PetsComponent = (function () {
-    function PetsComponent(petService, router, getImageService) {
+    function PetsComponent(petService, router, getImageService, toastr, vcr) {
         this.petService = petService;
         this.router = router;
         this.getImageService = getImageService;
+        this.toastr = toastr;
         this.filterBar = new __WEBPACK_IMPORTED_MODULE_4__shared_pet__["a" /* Pet */]();
+        this.toastr.setRootViewContainerRef(vcr);
     }
     PetsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -2120,6 +2125,7 @@ var PetsComponent = (function () {
     };
     PetsComponent.prototype.getByStatus = function (status) {
         var _this = this;
+        this.toastr.info('Loading ', 'Loading');
         var clases = document.getElementsByClassName('psln-navUsersText2');
         for (var x = 0; x < clases.length; x++) {
             clases[x].classList.remove('psln-active');
@@ -2162,10 +2168,10 @@ PetsComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/home/pet/pets/pets.component.css")],
         providers: [__WEBPACK_IMPORTED_MODULE_1__shared_pet_service__["a" /* PetService */], __WEBPACK_IMPORTED_MODULE_3__shared_socket_get_image_service__["a" /* GetImageService */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_pet_service__["a" /* PetService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_pet_service__["a" /* PetService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_socket_get_image_service__["a" /* GetImageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_socket_get_image_service__["a" /* GetImageService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_pet_service__["a" /* PetService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__shared_pet_service__["a" /* PetService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__shared_socket_get_image_service__["a" /* GetImageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__shared_socket_get_image_service__["a" /* GetImageService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_ng2_toastr_ng2_toastr__["ToastsManager"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ng2_toastr_ng2_toastr__["ToastsManager"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]) === "function" && _e || Object])
 ], PetsComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=pets.component.js.map
 
 /***/ }),
