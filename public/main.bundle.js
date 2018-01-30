@@ -2571,9 +2571,29 @@ var LoginComponent = (function () {
         var _this = this;
         this.socketService.login(this.username, this.password, null).
             then(function (resolve) {
-            _this.loginStatus = 'Success login';
-            _this.router.navigate(['/home']);
-            console.log(_this.loginStatus);
+            _this.socketService.getType().subscribe(function (res) {
+                console.dir("Type ", res);
+                if (res == "superuser") {
+                    _this.loginStatus = 'Success login';
+                    _this.router.navigate(['/home']);
+                    console.log(_this.loginStatus);
+                }
+                if (res == "volunteer") {
+                    _this.loginStatus = 'Success login';
+                    _this.router.navigate(['/Portal/Opportunities']);
+                    console.log(_this.loginStatus);
+                }
+                if (res == "employee") {
+                    _this.loginStatus = 'Success login';
+                    _this.router.navigate(['/pets']);
+                    console.log(_this.loginStatus);
+                }
+                if (res == "foster") {
+                    _this.loginStatus = 'Success login';
+                    _this.router.navigate(['/Portal/']);
+                    console.log(_this.loginStatus);
+                }
+            });
         }, function (reject) {
             _this.loginStatus = 'Success login... nope';
             console.log(reject);
@@ -2692,7 +2712,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/nav/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top psln-navbarTop\" *ngIf=\"!isLogin\">\r\n    <div class=\"container\">\r\n      <div class=\"navbar-header psln-navHeader\">\r\n        <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\r\n          <span class=\"sr-only\">Toggle navigation</span>\r\n          <span class=\"icon-bar\"></span>\r\n          <span class=\"icon-bar\"></span>\r\n          <span class=\"icon-bar\"></span>\r\n        </button>\r\n        <a class=\"navbar-brand psln-logo\" routerLink=\"\"></a>\r\n      </div>\r\n      <div id=\"navbar\" class=\"collapse navbar-collapse  psln-nav\">\r\n        <ul class=\"nav navbar-nav navbar-right\"  >\r\n            <li><a class=\"psln-home\" routerLink=\"/home\">Home</a></li>\r\n            <li><a class=\"psln-contact\" routerLink=\"/contact\">Contact</a></li>\r\n            <li><a class=\"psln-tools\" routerLink=\"/tools\">Tools</a></li>\r\n            <li><a class=\"psln-users\" routerLink=\"/user\">Users</a></li>\r\n            <li style=\"    top: -15px;\"><a routerLink=\"/Portal/Volunteer\"><img class=\"psln-userInfo\" src=\"http://www.pieglobal.com/wp-content/uploads/2015/10/placeholder-user.png\"></a></li> \r\n        </ul>\r\n      </div><!--/.navbar-collapse -->\r\n    </div>\r\n  </nav>"
+module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top psln-navbarTop\" *ngIf=\"!isLogin\">\r\n  <div class=\"container\">\r\n    <div class=\"navbar-header psln-navHeader\">\r\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\"\r\n        aria-controls=\"navbar\">\r\n        <span class=\"sr-only\">Toggle navigation</span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <a class=\"navbar-brand psln-logo\" routerLink=\"\"></a>\r\n    </div>\r\n    <div id=\"navbar\" class=\"collapse navbar-collapse  psln-nav\">\r\n      <ul class=\"nav navbar-nav navbar-right\"  *ngIf=\"superuser\">\r\n        <li>\r\n          <a class=\"psln-home\" routerLink=\"/home\">Home</a>\r\n        </li>\r\n        <li>\r\n          <a class=\"psln-contact\" routerLink=\"/contact\">Contact</a>\r\n        </li>\r\n        <li>\r\n          <a class=\"psln-tools\" routerLink=\"/tools\">Tools</a>\r\n        </li>\r\n        <li>\r\n          <a class=\"psln-users\" routerLink=\"/user\">Users</a>\r\n        </li>\r\n        <li style=\"    top: -15px;\">\r\n          <a routerLink=\"/Portal/Volunteer\">\r\n            <img class=\"psln-userInfo\" src=\"http://www.pieglobal.com/wp-content/uploads/2015/10/placeholder-user.png\">\r\n          </a>\r\n        </li>\r\n      </ul>\r\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"employee\">  \r\n        <li>\r\n          <a class=\"psln-users\" routerLink=\"/user\">Users</a>\r\n        </li>\r\n        <li style=\"    top: -15px;\">\r\n          <a routerLink=\"/Portal/Volunteer\">\r\n            <img class=\"psln-userInfo\" src=\"http://www.pieglobal.com/wp-content/uploads/2015/10/placeholder-user.png\">\r\n          </a>\r\n        </li>\r\n      </ul>\r\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"volunteer\">\r\n        <li style=\"    top: -15px;\">\r\n          <a routerLink=\"/Portal/Volunteer\">\r\n            <img class=\"psln-userInfo\" src=\"http://www.pieglobal.com/wp-content/uploads/2015/10/placeholder-user.png\">\r\n          </a>\r\n        </li>\r\n      </ul>\r\n      <ul class=\"nav navbar-nav navbar-right\" *ngIf=\"fooster\"> \r\n        <li style=\"    top: -15px;\">\r\n          <a routerLink=\"/Portal/Volunteer\">\r\n            <img class=\"psln-userInfo\" src=\"http://www.pieglobal.com/wp-content/uploads/2015/10/placeholder-user.png\">\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n    <!--/.navbar-collapse -->\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -2703,6 +2723,7 @@ module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top psln-navba
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_socket_socket_manager_service__ = __webpack_require__("../../../../../src/app/shared/socket/socket-manager.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2714,12 +2735,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var HeaderComponent = (function () {
-    function HeaderComponent(router) {
+    function HeaderComponent(router, socketService) {
         this.router = router;
+        this.socketService = socketService;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.socketService.getType().subscribe(function (res) {
+            _this.showNav(res.toString());
+        });
         if (this.router.url == '/register' || this.router.url == '/') {
             this.isLogin = true;
         }
@@ -2730,6 +2756,32 @@ var HeaderComponent = (function () {
             _this.isLogin = (event.url == '/register' || event.url == '/');
         });
     };
+    HeaderComponent.prototype.showNav = function (type) {
+        if (type == "superuser") {
+            this.superuser = true;
+            this.volunteer = false;
+            this.employee = false;
+            this.fooster = false;
+        }
+        if (type == "volunteer") {
+            this.volunteer = true;
+            this.superuser = false;
+            this.employee = false;
+            this.fooster = false;
+        }
+        if (type == "employee") {
+            this.employee = true;
+            this.superuser = false;
+            this.volunteer = false;
+            this.fooster = false;
+        }
+        if (type == "foster") {
+            this.fooster = true;
+            this.superuser = false;
+            this.volunteer = false;
+            this.employee = false;
+        }
+    };
     return HeaderComponent;
 }());
 HeaderComponent = __decorate([
@@ -2738,10 +2790,10 @@ HeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/nav/header/header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/nav/header/header.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_socket_socket_manager_service__["a" /* SocketManagerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__shared_socket_socket_manager_service__["a" /* SocketManagerService */]) === "function" && _b || Object])
 ], HeaderComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=header.component.js.map
 
 /***/ }),
@@ -3441,10 +3493,12 @@ GetImageService = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocketManagerService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client__ = __webpack_require__("../../../../socket.io-client/lib/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__("../../../../socket.io-client/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3458,22 +3512,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SocketManagerService = SocketManagerService_1 = (function () {
     function SocketManagerService(router) {
         this.router = router;
         this.socket = null;
-        this.serverUrl = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].apiUrl;
+        this.serverUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].apiUrl;
     }
     SocketManagerService.prototype.login = function (username, password, sessionId) {
         var _this = this;
         var context = this;
         console.log('username', username, 'password', password);
         return new Promise(function (resolve, reject) {
-            var init = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.serverUrl);
+            var init = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(_this.serverUrl);
             if (init == null)
                 reject();
             else {
-                var s = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__["connect"](_this.serverUrl);
+                var s = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__["connect"](_this.serverUrl);
                 s.on('disconnect', function (reply) {
                     sessionStorage.fppToken = null;
                     SocketManagerService_1.isLoggedIn = false;
@@ -3513,6 +3568,15 @@ var SocketManagerService = SocketManagerService_1 = (function () {
                 });
             }
         });
+    };
+    SocketManagerService.prototype.getType = function () {
+        var _this = this;
+        var observable = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
+            _this.emit('get my user group', {}).then(function (res) {
+                observer.next(res);
+            });
+        });
+        return observable;
     };
     SocketManagerService.prototype.logout = function () {
         sessionStorage.fppToken = null;
@@ -3568,7 +3632,7 @@ SocketManagerService.isLoggedIn = false;
 SocketManagerService.socket = null;
 SocketManagerService = SocketManagerService_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]) === "function" && _a || Object])
 ], SocketManagerService);
 
 var SocketManagerService_1, _a;
